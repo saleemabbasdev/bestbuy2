@@ -1,6 +1,7 @@
 from products import Product
 from store import Store
 
+
 def start(store_obj: Store):
     """
     Displays an interactive menu for the store management system
