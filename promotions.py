@@ -1,0 +1,32 @@
+from abc import ABC, abstractmethod
+
+
+class Promotion(ABC):
+    def __init__(self, name):
+        self.name = name
+
+    @abstractmethod
+    def apply_promotion(self, product, quantity) -> float:
+        pass
+
+
+class PercentDiscount(Promotion):
+    def __init__(self, name, percent):
+        super().__init__(name)
+        self.percent = percent
+
+    def apply_promotion(self, product, quantity) -> float:
+        return product.price * quantity * (1 - self.percent / 100)
+
+
+class SecondHalfPrice(Promotion):
+    def apply_promotion(self, product, quantity) -> float:
+        pairs = quantity // 2
+        singles = quantity % 2
+        return pairs * product.price * 1.5 + singles * product.price
+
+
+class ThirdOneFree(Promotion):
+    def apply_promotion(self, product, quantity) -> float:
+        free_items = quantity // 3
+        return (quantity - free_items) * product.price
