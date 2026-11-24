@@ -1,5 +1,8 @@
 from products import Product
 from store import Store
+from NonStockedProducts import NonStockedProduct
+from  LimitedProducts import LimitedProduct
+import store
 
 def start(store_obj: Store):
     """
@@ -64,12 +67,14 @@ def start(store_obj: Store):
 
 def main():
     # Setup initial stock of inventory
-    product_list = [
-        Product("MacBook Air M2", price=1450, quantity=100),
-        Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-        Product("Google Pixel 7", price=500, quantity=250)
-    ]
-    best_buy = Store(product_list)
+    # setup initial stock of inventory
+    product_list = [Product("MacBook Air M2", price=1450, quantity=100),
+                    Product("Bose QuietComfort Earbuds", price=250, quantity=500),
+                    Product("Google Pixel 7", price=500, quantity=250),
+                    NonStockedProduct("Windows License", price=125),
+                    LimitedProduct("Shipping", price=10, quantity=250, maximum=1)
+                    ]
+    best_buy = store.Store(product_list)
 
     # Start the interactive menu loop
     start(best_buy)
