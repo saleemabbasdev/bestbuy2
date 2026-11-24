@@ -23,6 +23,8 @@ class Product:
 
     def set_quantity(self, quantity: int):
         self.quantity = quantity
+        if self.quantity == 0:
+            self.deactivate()
 
     def is_active(self):
         if self.active:
@@ -53,6 +55,5 @@ class Product:
             raise ValueError(f"Not enough stock! Available: {self.quantity}, Requested: {quantity}")
 
         total_price = quantity * self.price
-        self.quantity -= quantity
-
+        self.set_quantity(self.quantity - quantity)
         return float(total_price)
